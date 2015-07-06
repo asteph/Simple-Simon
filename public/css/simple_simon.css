@@ -1,18 +1,38 @@
+main{
+	margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    margin-top: 50px;
+    text-align: center;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 1.5rem;
+}
 .green{
 	background-color: #008C4A;
 }
 .red{
-	background-color: #FF3034;
+	background-color: #FF4244;
 }
 .blue{
-	background-color: #00C9F9;
+	background-color: #10C1F8;
 }
 .yellow{
 	background-color: #EABA3F;
 }
 #gamebody{
-
+	border: 3px solid;
+	width: 400px;
+	height: 400px;
+	margin: 50px;
+	box-shadow: 10px 10px 5px #CCC;
+	background-color: #828281;
 }
 .button{
-	
+	height: 150px;
+	width: 150px;
+	float: left;
+	margin-left: 30px;
+	margin-top: 30px;
+	box-shadow: 5px 5px 10px #000;
+	border: 2px solid;
 }
