@@ -9,11 +9,76 @@
 	<main>
 		<h1>Simple Simon</h1>
 		<div id="gamebody">
-			<div class="button green"></div>
-			<div class="button red"></div>
-			<div class="button yellow"></div>
-			<div class="button blue"></div>
+			<div id="0"class="button green"></div>
+			<div id="1"class="button red"></div>
+			<div id="2"class="button yellow"></div>
+			<div id="3"class="button blue"></div>
 		</div>
+		<button id="start" type='button'>PLAY!</button>
 	</main>
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+		
+		  	"use strict";
+		  	var randomSequence = [];
+		  	var userSequence = [];
+		  	var arraysMatch;
+			//random function gets a random button and pushes that to the array
+			var getRandom = function(){
+				var buttons = $('.button'); 	
+				var random = Math.floor(Math.random() * 4);
+				randomSequence.push(random);
+				return buttons[random];
+			};	
+
+
+			//on click,lights up the button and then fades it back out
+			var blink = function(target){
+				$(target).fadeTo('fast', 1, function(){
+					$(target).fadeTo('fast', 0.5);
+			  	});
+			};
+
+			$('.button').on('click',function() {
+				blink($(this));
+				userSequence.push(parseInt($(this).attr('id')));
+				console.log(userSequence)
+				getRandom();
+		  	});
+			//cycles through the randomSequence array and blinks each corresponding div
+		  	var blinkArray = function(){
+		  		var time = 500;
+	  			var buttons = $('.button');
+		  		$.each(randomSequence, function(i, buttonNumber){
+		  			setTimeout(function(){
+		  				console.log(buttonNumber);
+		  				blink($(buttons[buttonNumber]));
+  					}, time);
+	  				time += 500;
+
+		  		});
+		  	};
+
+		  	//create the random sequence and keep track of the user sequence
+		  	//make sure that they match
+	  		// $('#start').click(function(){
+	  		// 	while(arraysMatch){
+
+		  	// 		console.log(randomSequence);
+		  	// 		if (randomSequence.length == userSequence.length){
+			  // 			for (var i = 0; i < randomSequence.length; ++i) {
+			  // 			    if (userSequence[i] !== randomSequence[i]){
+			  // 					arraysMatch = false;
+			  // 				}else {
+			  // 					arraysMatch = true;
+			  // 				}
+			  // 			}	
+		  	// 		}
+
+	  		// 	}
+		  	// });
+		
+		
+	</script>
 </body>
 </html>

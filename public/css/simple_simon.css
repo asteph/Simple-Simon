@@ -35,4 +35,5 @@ main{
 	margin-top: 30px;
 	box-shadow: 5px 5px 10px #000;
 	border: 2px solid;
+	opacity: .5;
 }
