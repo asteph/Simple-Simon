@@ -22,13 +22,14 @@
 		  	"use strict";
 		  	var randomSequence = [];
 		  	var userSequence = [];
+		  	var timeToAnswer = 5000;
+		  	var clickCounter = 0;
 		  	var arraysMatch;
 			//random function gets a random button and pushes that to the array
 			var getRandom = function(){
 				var buttons = $('.button'); 	
 				var random = Math.floor(Math.random() * 4);
 				randomSequence.push(random);
-				return buttons[random];
 			};	
 
 
@@ -39,44 +40,60 @@
 			  	});
 			};
 
-			$('.button').on('click',function() {
-				blink($(this));
-				userSequence.push(parseInt($(this).attr('id')));
-				console.log(userSequence)
-				getRandom();
-		  	});
 			//cycles through the randomSequence array and blinks each corresponding div
 		  	var blinkArray = function(){
-		  		var time = 500;
+		  		var time = 650;
 	  			var buttons = $('.button');
 		  		$.each(randomSequence, function(i, buttonNumber){
 		  			setTimeout(function(){
-		  				console.log(buttonNumber);
 		  				blink($(buttons[buttonNumber]));
   					}, time);
-	  				time += 500;
-
+	  				time += 650;
 		  		});
 		  	};
-
+		  	
+		  	var showSequence = function(){
+		  		console.log('showing sequence');
+	  			getRandom();
+	  			blinkArray();
+	  			console.log(timeToAnswer);
+	  			setTimeout(checkArray, timeToAnswer);
+		  	}
 		  	//create the random sequence and keep track of the user sequence
 		  	//make sure that they match
-	  		// $('#start').click(function(){
-	  		// 	while(arraysMatch){
-
-		  	// 		console.log(randomSequence);
-		  	// 		if (randomSequence.length == userSequence.length){
-			  // 			for (var i = 0; i < randomSequence.length; ++i) {
-			  // 			    if (userSequence[i] !== randomSequence[i]){
-			  // 					arraysMatch = false;
-			  // 				}else {
-			  // 					arraysMatch = true;
-			  // 				}
-			  // 			}	
-		  	// 		}
-
-	  		// 	}
-		  	// });
+	  		$('#start').click(function(){
+	  			userSequence = [];
+	  			randomSequence = [];
+	  			getRandom();
+	  			blinkArray();
+				$('.button').on('click',function() {
+					blink($(this));
+					clickCounter += 1;
+					userSequence.push(parseInt($(this).attr('id')));
+					console.log(userSequence);
+					console.log(randomSequence);
+					if(userSequence.length == randomSequence.length){
+						console.log('checking Array');
+						console.log(userSequence.length);
+						for (var i = 0; i < userSequence.length; ++i) {
+							console.log(userSequence[i]);
+							console.log(randomSequence[i]);
+						    if (userSequence[i] !== randomSequence[i]){
+						    	arraysMatch = false;
+							}else {
+								arraysMatch = true;
+							}
+						}
+						if(arraysMatch){
+							userSequence = [];
+							getRandom();
+							blinkArray();
+						}else{
+							alert('Improve your memory you must.');
+						}
+					}
+			  	});
+		  	});
 		
 		
 	</script>
