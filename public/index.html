@@ -24,81 +24,78 @@
 	</audio>
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript">
-		
-		  	"use strict";
-		  	var randomSequence = [];
-		  	var timeToAnswer = 5000;
-		  	//set up audio for game over sound
-			var gameOver = document.getElementById("gameOver"); 
-			function playGameOver() { 
-			    gameOver.play(); 
-			}
-			//set up audio for beep on each button
-			var buttonBeep = document.getElementById("buttonBeep"); 
-			function playButtonBeep() { 
-			    buttonBeep.play(); 
-			} 
-			//random function gets a random button and pushes that to the array
-			var getRandom = function(){
-				var buttons = $('.button'); 	
-				var random = Math.floor(Math.random() * 4);
-				randomSequence.push(random);
-			};	
-			//on click,lights up the button and then fades it back out
-			var blink = function(target){
-				$(target).addClass('buttonDown');
-				playButtonBeep();
-				$(target).fadeTo('fast', 1, function(){
-					$(target).fadeTo('fast', 0.5);
-					$(target).removeClass('buttonDown');
-			  	});
-			};
-
-			//cycles through the randomSequence array and blinks each corresponding div
-		  	var blinkArray = function(){
-		  		var time = 650;
-	  			var buttons = $('.button');
-		  		$.each(randomSequence, function(i, buttonNumber){
-		  			setTimeout(function(){
-		  				blink($(buttons[buttonNumber]));
-  					}, time);
-	  				time += 650;
-		  		});
-		  	};
-		  	//generate random value stored in randomSequence array and animate
-	  		$('#start').click(function(){
-	  			$('#start').addClass('buttonDown');
-	  			randomSequence = [];
-	  			getRandom();
-	  			blinkArray();
-	  			var counter = 0;
-			  	//check value of button clicked to the array value that the user is on
-			  	//if they match go to the next number and check to see if last number
-			  	//if last number reset counter, add another blink to random and display
-				$('.button').on('click',function() {
-					blink($(this));
-					if (parseInt($(this).attr('id')) == randomSequence[counter]){
-						counter += 1;
-						if(counter == randomSequence.length){
-							$('h3').html('Round<br>' + (counter + 1));
-							counter = 0;
-							getRandom();
-							blinkArray();
-						}
-					}else{
-						//turn off buttons
-						$('.button').off();
-						$('h3').html('Game<br>Over');
-						playGameOver();
-						setTimeout(function(){
-							$('#start').removeClass('buttonDown');
-							$('h3').html('Play Again!');
-						}, 3000);
-					}
-			  	});
+	  	"use strict";
+	  	var randomSequence = [];
+	  	var timeToAnswer = 5000;
+	  	//set up audio for game over sound
+		var gameOver = document.getElementById("gameOver"); 
+		function playGameOver() { 
+		    gameOver.play(); 
+		}
+		//set up audio for beep on each button
+		var buttonBeep = document.getElementById("buttonBeep"); 
+		function playButtonBeep() { 
+		    buttonBeep.play(); 
+		} 
+		//random function gets a random button and pushes that to the array
+		var getRandom = function(){
+			var buttons = $('.button'); 	
+			var random = Math.floor(Math.random() * 4);
+			randomSequence.push(random);
+		};	
+		//on click,lights up the button and then fades it back out
+		var blink = function(target){
+			$(target).addClass('buttonDown');
+			playButtonBeep();
+			$(target).fadeTo('fast', 1, function(){
+				$(target).fadeTo('fast', 0.5);
+				$(target).removeClass('buttonDown');
 		  	});
-		
-		
+		};
+
+		//cycles through the randomSequence array and blinks each corresponding div
+	  	var blinkArray = function(){
+	  		var time = 650;
+  			var buttons = $('.button');
+	  		$.each(randomSequence, function(i, buttonNumber){
+	  			setTimeout(function(){
+	  				blink($(buttons[buttonNumber]));
+					}, time);
+  				time += 650;
+	  		});
+	  	};
+	  	//generate random value stored in randomSequence array and animate
+  		$('#start').click(function(){
+  			$('#start').addClass('buttonDown');
+  			randomSequence = [];
+  			getRandom();
+  			blinkArray();
+  			var counter = 0;
+		  	//check value of button clicked to the array value that the user is on
+		  	//if they match go to the next number and check to see if last number
+		  	//if last number reset counter, add another blink to random and display
+			$('.button').on('click',function() {
+				blink($(this));
+				if (parseInt($(this).attr('id')) == randomSequence[counter]){
+					counter += 1;
+					if(counter == randomSequence.length){
+						$('h3').html('Round<br>' + (counter + 1));
+						counter = 0;
+						getRandom();
+						blinkArray();
+					}
+				}else{
+					//turn off buttons
+					$('.button').off();
+					$('h3').html('Game<br>Over');
+					playGameOver();
+					setTimeout(function(){
+						$('#start').removeClass('buttonDown');
+						$('h3').html('Play Again!');
+					}, 3000);
+				}
+		  	});
+	  	});
 	</script>
 </body>
 </html>
