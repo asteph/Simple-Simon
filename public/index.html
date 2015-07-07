@@ -16,12 +16,28 @@
 			<div id="3"class="button styling blue"></div>
 		</div>
 	</main>
+	<audio id="gameOver">
+	  <source src="game-over.wav" type="audio/wav">
+	</audio>
+	<audio id="buttonBeep">
+	  <source src="tone-beep.wav" type="audio/wav">
+	</audio>
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript">
 		
 		  	"use strict";
 		  	var randomSequence = [];
 		  	var timeToAnswer = 5000;
+		  	//set up audio for game over sound
+			var gameOver = document.getElementById("gameOver"); 
+			function playGameOver() { 
+			    gameOver.play(); 
+			}
+			//set up audio for beep on each button
+			var buttonBeep = document.getElementById("buttonBeep"); 
+			function playButtonBeep() { 
+			    buttonBeep.play(); 
+			} 
 			//random function gets a random button and pushes that to the array
 			var getRandom = function(){
 				var buttons = $('.button'); 	
@@ -31,6 +47,7 @@
 			//on click,lights up the button and then fades it back out
 			var blink = function(target){
 				$(target).addClass('buttonDown');
+				playButtonBeep();
 				$(target).fadeTo('fast', 1, function(){
 					$(target).fadeTo('fast', 0.5);
 					$(target).removeClass('buttonDown');
@@ -72,10 +89,11 @@
 						//turn off buttons
 						$('.button').off();
 						$('h3').html('Game<br>Over');
+						playGameOver();
 						setTimeout(function(){
 							$('#start').removeClass('buttonDown');
 							$('h3').html('Play Again!');
-						}, 1000);
+						}, 3000);
 					}
 			  	});
 		  	});
