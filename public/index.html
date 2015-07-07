@@ -21,17 +21,13 @@
 		
 		  	"use strict";
 		  	var randomSequence = [];
-		  	var userSequence = [];
 		  	var timeToAnswer = 5000;
-		  	var arraysMatch;
 			//random function gets a random button and pushes that to the array
 			var getRandom = function(){
 				var buttons = $('.button'); 	
 				var random = Math.floor(Math.random() * 4);
 				randomSequence.push(random);
 			};	
-
-
 			//on click,lights up the button and then fades it back out
 			var blink = function(target){
 				$(target).addClass('buttonDown');
@@ -52,15 +48,16 @@
 	  				time += 650;
 		  		});
 		  	};
-		  	//create the random sequence and keep track of the user sequence
-		  	//make sure that they match
+		  	//generate random value stored in randomSequence array and animate
 	  		$('#start').click(function(){
 	  			$('#start').addClass('buttonDown');
-	  			userSequence = [];
 	  			randomSequence = [];
 	  			getRandom();
 	  			blinkArray();
 	  			var counter = 0;
+			  	//check value of button clicked to the array value that the user is on
+			  	//if they match go to the next number and check to see if last number
+			  	//if last number reset counter, add another blink to random and display
 				$('.button').on('click',function() {
 					blink($(this));
 					if (parseInt($(this).attr('id')) == randomSequence[counter]){
@@ -72,6 +69,7 @@
 						}
 					}else{
 						$('#start').removeClass('buttonDown');
+						//turn off buttons
 						$('.button').off();
 						alert('Improve your memory you must.');
 					}
