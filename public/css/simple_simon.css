@@ -7,8 +7,16 @@ main{
     font-family: 'Brush Script MT', cursive;
     font-size: 1.5rem;
 }
+h1 {
+    text-shadow: 2px 2px #CCC;
+}
+h3{
+	font-size: 1.25rem;
+	font-family: Tahoma, Geneva, sans-serif;
+	color: #000;
+}
 .green{
-	background-color: #008C4A;
+	background-color: #29C16B;
 }
 .red{
 	background-color: #FF4244;
@@ -20,22 +28,39 @@ main{
 	background-color: #EABA3F;
 }
 #gamebody{
+	position: relative;
 	border: 3px solid;
 	width: 400px;
 	height: 400px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 20px;
-	box-shadow: 10px 10px 5px #CCC;
 	background-color: #828281;
+	border-style: outset;
+	border-color: #CCC;
+	border-width: 10px;
 }
 .button{
 	height: 150px;
 	width: 150px;
+	opacity: .5;
 	float: left;
 	margin-left: 30px;
 	margin-top: 30px;
-	box-shadow: 5px 5px 10px #000;
+	border-width: 3px;
+}
+.styling{
 	border: 2px solid;
-	opacity: .5;
+	border-style: outset;
+	border-color: #CCC;
+}
+.buttonDown{
+	border-style: inset;
+}
+#start{
+	z-index: 10;
+	position: absolute;
+	right: 163px;
+	top: 160px;
+	border-width: 2px;
 }

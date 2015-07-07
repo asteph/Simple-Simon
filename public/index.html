@@ -9,12 +9,12 @@
 	<main>
 		<h1>Simple Simon</h1>
 		<div id="gamebody">
-			<div id="0"class="button green"></div>
-			<div id="1"class="button red"></div>
-			<div id="2"class="button yellow"></div>
-			<div id="3"class="button blue"></div>
+			<div id="0"class="button styling green"></div>
+			<div id="1"class="button styling red"></div>
+			<button id="start" type='button' class="styling"><h3>PLAY!</h3></button>
+			<div id="2"class="button styling yellow"></div>
+			<div id="3"class="button styling blue"></div>
 		</div>
-		<button id="start" type='button'>PLAY!</button>
 	</main>
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript">
@@ -34,8 +34,10 @@
 
 			//on click,lights up the button and then fades it back out
 			var blink = function(target){
+				$(target).addClass('buttonDown');
 				$(target).fadeTo('fast', 1, function(){
 					$(target).fadeTo('fast', 0.5);
+					$(target).removeClass('buttonDown');
 			  	});
 			};
 
@@ -50,17 +52,10 @@
 	  				time += 650;
 		  		});
 		  	};
-		  	
-		  	var showSequence = function(){
-		  		console.log('showing sequence');
-	  			getRandom();
-	  			blinkArray();
-	  			console.log(timeToAnswer);
-	  			setTimeout(checkArray, timeToAnswer);
-		  	}
 		  	//create the random sequence and keep track of the user sequence
 		  	//make sure that they match
 	  		$('#start').click(function(){
+	  			$('#start').addClass('buttonDown');
 	  			userSequence = [];
 	  			randomSequence = [];
 	  			getRandom();
@@ -68,20 +63,11 @@
 				$('.button').on('click',function() {
 					blink($(this));
 					userSequence.push(parseInt($(this).attr('id')));
-					console.log('user length');
-					console.log(userSequence.length);
-					console.log('generated length');
-					console.log(randomSequence.length);
 					if(userSequence.length == randomSequence.length){
-						console.log(userSequence);
-						console.log(randomSequence);
-						console.log('checking Array');
-						console.log('values one by one:');
 						for (var i = 0; i < userSequence.length; ++i) {
-							console.log(userSequence[i]);
-							console.log(randomSequence[i]);
 						    if (userSequence[i] !== randomSequence[i]){
 						    	arraysMatch = false;
+						    	break;
 							}else {
 								arraysMatch = true;
 							}
@@ -91,8 +77,9 @@
 							getRandom();
 							blinkArray();
 						}else{
-							alert('Improve your memory you must.');
+							$('#start').removeClass('buttonDown');
 							$('.button').off();
+							alert('Improve your memory you must.');
 						}
 					}
 			  	});
