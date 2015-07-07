@@ -63,15 +63,19 @@
 					if (parseInt($(this).attr('id')) == randomSequence[counter]){
 						counter += 1;
 						if(counter == randomSequence.length){
+							$('h3').html('Round<br>' + (counter + 1));
 							counter = 0;
 							getRandom();
 							blinkArray();
 						}
 					}else{
-						$('#start').removeClass('buttonDown');
 						//turn off buttons
 						$('.button').off();
-						alert('Improve your memory you must.');
+						$('h3').html('Game<br>Over');
+						setTimeout(function(){
+							$('#start').removeClass('buttonDown');
+							$('h3').html('Play Again!');
+						}, 1000);
 					}
 			  	});
 		  	});

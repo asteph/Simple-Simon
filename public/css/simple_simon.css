@@ -60,7 +60,9 @@ h3{
 #start{
 	z-index: 10;
 	position: absolute;
-	right: 163px;
-	top: 160px;
+	right: 150px;
+	top: 150px;
 	border-width: 2px;
+	height: 100px;
+	width: 100px;
 }
