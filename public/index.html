@@ -60,27 +60,20 @@
 	  			randomSequence = [];
 	  			getRandom();
 	  			blinkArray();
+	  			var counter = 0;
 				$('.button').on('click',function() {
 					blink($(this));
-					userSequence.push(parseInt($(this).attr('id')));
-					if(userSequence.length == randomSequence.length){
-						for (var i = 0; i < userSequence.length; ++i) {
-						    if (userSequence[i] !== randomSequence[i]){
-						    	arraysMatch = false;
-						    	break;
-							}else {
-								arraysMatch = true;
-							}
-						}
-						if(arraysMatch){
-							userSequence = [];
+					if (parseInt($(this).attr('id')) == randomSequence[counter]){
+						counter += 1;
+						if(counter == randomSequence.length){
+							counter = 0;
 							getRandom();
 							blinkArray();
-						}else{
-							$('#start').removeClass('buttonDown');
-							$('.button').off();
-							alert('Improve your memory you must.');
 						}
+					}else{
+						$('#start').removeClass('buttonDown');
+						$('.button').off();
+						alert('Improve your memory you must.');
 					}
 			  	});
 		  	});
