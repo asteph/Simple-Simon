@@ -23,7 +23,6 @@
 		  	var randomSequence = [];
 		  	var userSequence = [];
 		  	var timeToAnswer = 5000;
-		  	var clickCounter = 0;
 		  	var arraysMatch;
 			//random function gets a random button and pushes that to the array
 			var getRandom = function(){
@@ -68,13 +67,16 @@
 	  			blinkArray();
 				$('.button').on('click',function() {
 					blink($(this));
-					clickCounter += 1;
 					userSequence.push(parseInt($(this).attr('id')));
-					console.log(userSequence);
-					console.log(randomSequence);
+					console.log('user length');
+					console.log(userSequence.length);
+					console.log('generated length');
+					console.log(randomSequence.length);
 					if(userSequence.length == randomSequence.length){
+						console.log(userSequence);
+						console.log(randomSequence);
 						console.log('checking Array');
-						console.log(userSequence.length);
+						console.log('values one by one:');
 						for (var i = 0; i < userSequence.length; ++i) {
 							console.log(userSequence[i]);
 							console.log(randomSequence[i]);
@@ -90,6 +92,7 @@
 							blinkArray();
 						}else{
 							alert('Improve your memory you must.');
+							$('.button').off();
 						}
 					}
 			  	});
